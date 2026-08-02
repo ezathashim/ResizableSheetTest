@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		AE565022301FC0EF005AD5B3 /* ResizableSheetOverlay in Frameworks */ = {isa = PBXBuildFile; productRef = AE565021301FC0EF005AD5B3 /* ResizableSheetOverlay */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		AE565012301FC0D9005AD5B3 /* ResizableSheetTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ResizableSheetTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE565022301FC0EF005AD5B3 /* ResizableSheetOverlay in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = ResizableSheetTest;
 			packageProductDependencies = (
+				AE565021301FC0EF005AD5B3 /* ResizableSheetOverlay */,
 			);
 			productName = ResizableSheetTest;
 			productReference = AE565012301FC0D9005AD5B3 /* ResizableSheetTest.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = AE565009301FC0D9005AD5B3;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				AE565020301FC0EF005AD5B3 /* XCRemoteSwiftPackageReference "ResizableSheetOverlay" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AE565013301FC0D9005AD5B3 /* Products */;
 			projectDirPath = "";
@@ -274,7 +283,8 @@
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -318,7 +328,8 @@
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -351,6 +362,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AE565020301FC0EF005AD5B3 /* XCRemoteSwiftPackageReference "ResizableSheetOverlay" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ezathashim/ResizableSheetOverlay";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AE565021301FC0EF005AD5B3 /* ResizableSheetOverlay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE565020301FC0EF005AD5B3 /* XCRemoteSwiftPackageReference "ResizableSheetOverlay" */;
+			productName = ResizableSheetOverlay;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AE56500A301FC0D9005AD5B3 /* Project object */;
 }

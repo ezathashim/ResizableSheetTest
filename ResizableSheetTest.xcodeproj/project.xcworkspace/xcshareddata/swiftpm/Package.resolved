@@ -1,0 +1,15 @@
+{
+  "originHash" : "724aebfb2ac3bc6f1e50343654a1eb69cab4f49e4b9e0892efa4c45ad40fcbe2",
+  "pins" : [
+    {
+      "identity" : "resizablesheetoverlay",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ezathashim/ResizableSheetOverlay",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e3feceab5f5ff50b34378fb0d1f791510e86ff68"
+      }
+    }
+  ],
+  "version" : 3
+}
