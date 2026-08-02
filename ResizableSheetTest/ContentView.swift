@@ -4,22 +4,31 @@
 //
 //
 
+
 import SwiftUI
 import ResizableSheetOverlay
 
+    // MARK: - Sample Identifiable Data Model
+struct TestItem: Identifiable {
+    let id = UUID()
+    let title: String
+    let description: String
+}
 
 struct ContentView: View {
         // Sheet presentation triggers
     @State private var showStandardSheet = false
     @State private var showToolbarSheet = false
     @State private var showDetentsSheet = false
-    @State private var showSizingSheet = false
+    
+        // Item-based presentation trigger
+    @State private var activeItem: TestItem?
     
         // Individual size bindings for overlay testing
     @State private var standardSheetSize = CGSize(width: 500, height: 400)
     @State private var toolbarSheetSize = CGSize(width: 500, height: 400)
     @State private var detentsSheetSize = CGSize(width: 500, height: 400)
-    @State private var sizingSheetSize = CGSize(width: 500, height: 400)
+    @State private var itemSheetSize = CGSize(width: 500, height: 400)
     
     var body: some View {
         VStack(spacing: 20) {
@@ -46,9 +55,12 @@ struct ContentView: View {
             }
             .buttonStyle(.bordered)
             
-                // 4. Presentation Sizing Test
-            Button("4. Sheet with Presentation Sizing") {
-                showSizingSheet = true
+                // 4. Item-Based Presentation Test
+            Button("4. Item-Based Resizable Sheet") {
+                activeItem = TestItem(
+                    title: "Item Presentation",
+                    description: "This sheet was initialized passing an Identifiable model instance."
+                )
             }
             .buttonStyle(.bordered)
         }
@@ -88,15 +100,18 @@ struct ContentView: View {
             DetentsTestSheetView(isPresented: $showDetentsSheet)
         }
             // ----------------------------------------------------
-            // 4. PRESENTATION SIZING TEST OVERLAY
+            // 4. ITEM-BASED SHEET OVERLAY TEST
             // ----------------------------------------------------
         .resizableSheetOverlay(
-            isPresented: $showSizingSheet,
-            sheetSize: $sizingSheetSize,
+            item: $activeItem,
+            sheetSize: $itemSheetSize,
             minSize: CGSize(width: 320, height: 240),
-            maxSize: CGSize(width: 800, height: 600)
-        ) {
-            PresentationSizingTestSheetView(isPresented: $showSizingSheet)
+            maxSize: CGSize(width: 800, height: 600),
+            onDismiss: {
+                print("Item sheet was dismissed cleanly.")
+            }
+        ) { item in
+            ItemTestSheetView(item: item, activeItem: $activeItem)
         }
     }
 }
@@ -176,27 +191,26 @@ struct DetentsTestSheetView: View {
     }
 }
 
-    // MARK: - 4. Presentation Sizing Test Sheet
-struct PresentationSizingTestSheetView: View {
-    @Binding var isPresented: Bool
+    // MARK: - 4. Item-Based Test Sheet
+struct ItemTestSheetView: View {
+    let item: TestItem
+    @Binding var activeItem: TestItem?
     
     var body: some View {
         VStack(spacing: 20) {
             HStack {
-                Text("Presentation Sizing Test")
+                Text(item.title)
                     .font(.headline)
                 Spacer()
-                Button("Close") { isPresented = false }
+                Button("Close") { activeItem = nil }
             }
             Divider()
             Spacer()
-            Text("Testing if native `.presentationSizing` modifier causes layout conflicts or outer boundary clipping.")
+            Text(item.description)
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.secondary)
             Spacer()
         }
         .padding()
-            // Native presentation sizing modifier attached inside content
-        .presentationSizing(.fitted)
     }
 }
