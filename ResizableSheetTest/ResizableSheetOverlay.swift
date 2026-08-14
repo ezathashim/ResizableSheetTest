@@ -313,6 +313,7 @@ public struct ResizableSheetOverlay<SheetContent: View>: ViewModifier {
     public func body(content: Content) -> some View {
         ZStack {
             content
+                .id("resizableSheetHost")
 
             if mounted {
                 SheetCardChrome(
@@ -399,6 +400,7 @@ public struct ResizableItemSheetOverlay<Item: Identifiable, SheetContent: View>:
     public func body(content: Content) -> some View {
         ZStack {
             content
+                .id("resizableSheetHost")
 
             if mounted, let presentedItem {
                 SheetCardChrome(

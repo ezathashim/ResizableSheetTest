@@ -15,6 +15,7 @@ struct TestItem: Identifiable {
 }
 
 struct ContentView: View {
+    
         // Sheet presentation triggers
     @State private var showStandardSheet = false
     @State private var showToolbarSheet = false
@@ -22,12 +23,18 @@ struct ContentView: View {
     
         // Item-based presentation trigger
     @State private var activeItem: TestItem?
+
     
         // Individual size bindings for overlay testing
     @State private var standardSheetSize = CGSize(width: 500, height: 400)
     @State private var toolbarSheetSize = CGSize(width: 500, height: 400)
     @State private var detentsSheetSize = CGSize(width: 500, height: 400)
     @State private var itemSheetSize = CGSize(width: 500, height: 400)
+    
+    @State private var showUIKitBoolSheet = false
+    @State private var uiKitBoolSheetSize = CGSize(width: 500, height: 400)
+    @State private var uiKitActiveItem: TestItem?
+    @State private var uiKitSheetSize = CGSize(width: 500, height: 400)
     
     var body: some View {
         VStack(spacing: 20) {
@@ -60,6 +67,19 @@ struct ContentView: View {
                     title: "Item Presentation",
                     description: "This sheet was initialized passing an Identifiable model instance."
                 )
+            }
+            .buttonStyle(.bordered)
+                // 5. UIKit form-sheet (real presentation, no caller redraw test)
+            Button("5. UIKit Item-Resizable Sheet (real form sheet)") {
+                uiKitActiveItem = TestItem(
+                    title: "Item Presentation",
+                    description: "This sheet was initialized passing an Identifiable model instance for the UIKit based sheet."
+                )
+            }
+            .buttonStyle(.bordered)
+                // 6. UIKit Bool-driven sheet
+            Button("6. UIKit Bool-Resizable Sheet (real form sheet)") {
+                showUIKitBoolSheet = true
             }
             .buttonStyle(.bordered)
         }
@@ -111,6 +131,18 @@ struct ContentView: View {
             }
         ) { item in
             ItemTestSheetView(item: item, activeItem: $activeItem)
+        }
+        .platformResizableSheet(
+            item: $uiKitActiveItem,
+            sheetSize: $itemSheetSize
+        ) { item in
+            PlatformItemSheetBody(item: item, size: $itemSheetSize)
+        }
+        .platformResizableSheet(
+            isPresented: $showUIKitBoolSheet,
+            sheetSize: $uiKitBoolSheetSize
+        ) {
+            PlatformBoolSheetBody(size: $uiKitBoolSheetSize)
         }
     }
 }
