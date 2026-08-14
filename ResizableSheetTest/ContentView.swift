@@ -6,7 +6,6 @@
 
 
 import SwiftUI
-import ResizableSheetOverlay
 
     // MARK: - Sample Identifiable Data Model
 struct TestItem: Identifiable {
